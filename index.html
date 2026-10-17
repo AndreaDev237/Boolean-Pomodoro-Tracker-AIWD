@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>25:00 · Focus</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Material Symbols Rounded -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0" />
+
+  <!-- Foglio di stile esterno -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Contenitore principale semantico -->
+  <main class="app-container">
+
+    <!-- 1. Header con Brand e Pulsante Impostazioni -->
+    <header class="header">
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <h1 class="brand-title">Pomodoro Focus</h1>
+      </div>
+      <button type="button" class="settings-button" aria-label="Impostazioni" title="Impostazioni">
+        <span class="material-symbols-rounded">settings</span>
+      </button>
+    </header>
+
+    <!-- 2. Barra di Navigazione Modalità (Focus / Pausa breve / Pausa lunga) -->
+    <nav class="mode-nav" aria-label="Selezione modalità timer">
+      <button type="button" class="mode-button active" data-mode="focus">Focus</button>
+      <button type="button" class="mode-button" data-mode="shortBreak">Pausa breve</button>
+      <button type="button" class="mode-button" data-mode="longBreak">Pausa lunga</button>
+    </nav>
+
+    <!-- 3. Sezione Hero Timer con Anello Grafico Circolare SVG -->
+    <section class="timer-section" aria-label="Timer di concentrazione">
+      <div class="timer-ring-container">
+        <svg class="timer-svg" viewBox="0 0 240 240" aria-hidden="true">
+          <!-- Traccia di sfondo chiara -->
+          <circle class="timer-track" cx="120" cy="120" r="98"></circle>
+          <!-- Arco di progresso circolare animato -->
+          <circle class="timer-progress" id="progress-circle" cx="120" cy="120" r="98"></circle>
+        </svg>
+
+        <!-- Testo centrale con minuti:secondi ed etichetta -->
+        <div class="timer-content">
+          <span class="timer-display tabular-nums" id="timer-display">25:00</span>
+          <span class="timer-label" id="timer-label">CONCENTRATI</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Campo di Input per l'Intenzione di Lavoro -->
+    <section class="task-section">
+      <label for="task-input" class="task-label">Su cosa stai lavorando?</label>
+      <input type="text" id="task-input" class="task-input" placeholder="Es. ripassare il CSS" autocomplete="off" />
+    </section>
+
+    <!-- 5. Pulsanti di Controllo Principali -->
+    <section class="controls-section" aria-label="Controlli timer">
+      <!-- Pulsante Reset -->
+      <button type="button" class="circle-button" id="btn-reset" aria-label="Ripristina timer" title="Ripristina">
+        <span class="material-symbols-rounded">refresh</span>
+      </button>
+
+      <!-- Pulsante Primario Avvia / Pausa -->
+      <button type="button" class="primary-button" id="btn-toggle" aria-label="Avvia timer">
+        <span class="material-symbols-rounded" id="btn-toggle-icon">play_arrow</span>
+        <span id="btn-toggle-text">Avvia</span>
+      </button>
+
+      <!-- Pulsante Salta -->
+      <button type="button" class="circle-button" id="btn-skip" aria-label="Salta sessione" title="Salta">
+        <span class="material-symbols-rounded">skip_next</span>
+      </button>
+    </section>
+
+    <!-- 6. Indicatore Ciclo Sessioni (Pallini) -->
+    <section class="session-section" aria-label="Progresso sessioni">
+      <span class="session-title" id="session-title">Sessione 1 di 4</span>
+      <div class="session-dots" id="session-dots" role="status" aria-label="4 sessioni nel ciclo corrente">
+        <span class="session-dot"></span>
+        <span class="session-dot"></span>
+        <span class="session-dot"></span>
+        <span class="session-dot"></span>
+      </div>
+    </section>
+
+    <!-- 7. Card Riepilogo Giornaliero a Piè di Pagina -->
+    <section class="summary-card" aria-label="Riepilogo giornaliero">
+      <div class="summary-icon-box">
+        <span class="material-symbols-rounded">schedule</span>
+      </div>
+      <span class="summary-text" id="summary-text">
+        Oggi: 0 pomodori · 0 min di concentrazione
+      </span>
+    </section>
+
+  </main>
+
+  <!-- Script logico esterno -->
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,436 @@
+/* ==========================================================================
+   === VARIABILI CSS E DESIGN SYSTEM ===
+   ========================================================================== */
+:root {
+  /* Colori di base (modalità Focus) */
+  --color-primary: #E5484D;
+  --color-primary-hover: #D63C41;
+  --color-primary-glow: rgba(229, 72, 77, 0.28);
+  --color-secondary: #2F9E6E;
+  --color-background: #FFF8F3;
+  --color-surface: #FFFFFF;
+  --color-text-main: #1F1F1F;
+  --color-text-muted: #8A8A8A;
+  --color-border: #F4E8DF;
+  --color-track: #F3ECE7;
+  --color-dot-empty: #E0D6D0;
+
+  /* Tipografia */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Raggi di curvatura */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 9999px;
+
+  /* Ombre morbide */
+  --shadow-card: 0 4px 20px rgba(186, 142, 122, 0.08), 0 2px 6px -1px rgba(186, 142, 122, 0.04);
+  --shadow-glow: 0 8px 24px var(--color-primary-glow);
+  --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Modalità Pausa: sovrascrive la variabile primaria impostandola sul verde */
+body.break-mode {
+  --color-primary: #2F9E6E;
+  --color-primary-hover: #26855C;
+  --color-primary-glow: rgba(47, 158, 110, 0.28);
+}
+
+/* ==========================================================================
+   === RESET E IMPOSTAZIONI GLOBALI ===
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Layout mobile-first: centrato su desktop con larghezza massima di 420px */
+main.app-container {
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Evita lo sfarfallio orizzontale dei numeri mentre scorrono i secondi */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Regole per le icone di Google Fonts */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+}
+
+/* ==========================================================================
+   === 1. HEADER ===
+   ========================================================================== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Pallino rosso identificativo */
+.brand-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 1px 4px var(--color-primary-glow);
+  transition: background-color 0.3s ease;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.02em;
+}
+
+/* Pulsante impostazioni (decorativo) */
+.settings-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  box-shadow: var(--shadow-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.settings-button:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   === 2. SELETTORE MODALITÀ (TABS) ===
+   ========================================================================== */
+.mode-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 6px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  gap: 4px;
+}
+
+.mode-button {
+  height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mode-button:hover:not(.active) {
+  color: var(--color-text-main);
+}
+
+/* Scheda attiva */
+.mode-button.active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px var(--color-primary-glow);
+}
+
+/* ==========================================================================
+   === 3. TIMER CENTRALE E ANELLO SVG ===
+   ========================================================================== */
+.timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.timer-ring-container {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ruotiamo il cerchio SVG di -90 gradi per iniziare dall'alto (ore 12) */
+.timer-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+/* Anello di traccia fisso di sfondo */
+.timer-track {
+  fill: none;
+  stroke: var(--color-track);
+  stroke-width: 14;
+}
+
+/* Anello animato che si svuota nel tempo */
+.timer-progress {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-dasharray: 615.75;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+
+/* Testo centrale con minuti, secondi ed etichetta */
+.timer-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.timer-display {
+  font-size: 58px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.03em;
+}
+
+.timer-label {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   === 4. CAMPO TASK (INTENZIONE DI STUDIO/LAVORO) ===
+   ========================================================================== */
+.task-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.task-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--color-text-main);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.task-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+/* ==========================================================================
+   === 5. CONTROLLI DI AZIONE (PULSANTI) ===
+   ========================================================================== */
+.controls-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 4px;
+}
+
+/* Pulsanti circolari per Reset e Salta */
+.circle-button {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.circle-button:active {
+  transform: scale(0.95);
+}
+
+/* Pulsante primario (Avvia / Pausa) */
+.primary-button {
+  height: 56px;
+  min-width: 156px;
+  padding: 0 28px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--shadow-glow);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.3s ease;
+}
+
+.primary-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.primary-button:active {
+  transform: scale(0.97);
+}
+
+.primary-button .material-symbols-rounded {
+  font-variation-settings: 'FILL' 1;
+  font-size: 24px;
+}
+
+/* ==========================================================================
+   === 6. INDICATORE DI SESSIONE (PALLINI) ===
+   ========================================================================== */
+.session-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.session-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.session-dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.session-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-dot-empty);
+  background-color: var(--color-surface);
+  transition: all 0.3s ease;
+}
+
+/* Pallino di sessione completata */
+.session-dot.completed {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  box-shadow: 0 1px 4px rgba(47, 158, 110, 0.35);
+}
+
+/* ==========================================================================
+   === 7. CARD RIEPILOGO GIORNALIERO (FOOTER) ===
+   ========================================================================== */
+.summary-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.summary-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-text-main);
+}
+
+.summary-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
